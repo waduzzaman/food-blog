@@ -90,9 +90,10 @@ type Props = {
   params: {
     id: string
   }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default function RecipeDetail({ params }: Props) {
+export default async function RecipeDetail({ params, searchParams }: Props) {
   const recipe = recipesData[params.id] || recipesData['1'];
   
   return (
