@@ -5,7 +5,7 @@ const recipesData = {
   '1': {
     id: '1',
     title: 'Classic Italian Pasta',
-    description: 'A delicious homemade pasta with rich tomato sauce and fresh herbs. This authentic Italian recipe brings the taste of Rome to your kitchen.',
+    description: 'A homemade pasta dish with rich tomato sauce and fresh herbs.',
     prepTime: '10 mins',
     cookTime: '20 mins',
     servings: 4,
@@ -14,28 +14,24 @@ const recipesData = {
     image: 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8',
     ingredients: [
       '400g spaghetti',
-      '2 tablespoons olive oil',
+      '2 tbsp olive oil',
       '4 cloves garlic, minced',
       '1 can crushed tomatoes',
-      'Fresh basil leaves',
-      'Salt and pepper to taste',
+      'Fresh basil',
+      'Salt and pepper',
       'Grated Parmesan cheese'
     ],
     instructions: [
-      'Bring a large pot of salted water to boil',
-      'Cook pasta according to package instructions',
-      'Heat olive oil in a large pan over medium heat',
-      'Add minced garlic and sauté until fragrant',
-      'Add crushed tomatoes and simmer for 15 minutes',
-      'Season with salt and pepper',
-      'Toss cooked pasta with sauce',
-      'Garnish with fresh basil and Parmesan cheese'
+      'Boil salted water and cook pasta.',
+      'Heat oil, sauté garlic, add tomatoes.',
+      'Simmer for 15 mins, season.',
+      'Mix pasta with sauce, garnish with basil and cheese.'
     ]
   },
   '2': {
     id: '2',
     title: 'Chocolate Lava Cake',
-    description: 'Decadent chocolate cake with a gooey molten center. Perfect for chocolate lovers and special occasions.',
+    description: 'A decadent chocolate cake with a gooey center.',
     prepTime: '15 mins',
     cookTime: '30 mins',
     servings: 2,
@@ -50,23 +46,21 @@ const recipesData = {
       '100g sugar',
       '30g flour',
       'Pinch of salt',
-      'Vanilla ice cream for serving'
+      'Vanilla ice cream'
     ],
     instructions: [
-      'Preheat oven to 200°C (400°F)',
-      'Melt chocolate and butter together',
-      'Whisk eggs, egg yolks, and sugar until light and fluffy',
-      'Fold chocolate mixture into egg mixture',
-      'Sift in flour and salt, fold gently',
-      'Pour into greased ramekins',
-      'Bake for 12-14 minutes',
-      'Serve immediately with ice cream'
+      'Preheat oven to 200°C.',
+      'Melt chocolate and butter.',
+      'Whisk eggs, sugar, mix with chocolate.',
+      'Fold in flour and salt.',
+      'Pour into ramekins, bake 12-14 mins.',
+      'Serve with ice cream.'
     ]
   },
   '3': {
     id: '3',
     title: 'Mediterranean Salad',
-    description: 'Fresh and healthy salad with feta cheese and olives. A light and refreshing dish perfect for summer days.',
+    description: 'A fresh salad with feta cheese and olives.',
     prepTime: '15 mins',
     cookTime: '0 mins',
     servings: 4,
@@ -74,24 +68,20 @@ const recipesData = {
     category: 'Healthy',
     image: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe',
     ingredients: [
-      'Mixed salad greens',
+      'Mixed greens',
       'Cherry tomatoes',
-      'Cucumber, sliced',
-      'Red onion, sliced',
+      'Cucumber',
+      'Red onion',
       'Kalamata olives',
       'Feta cheese',
-      'Extra virgin olive oil',
+      'Olive oil',
       'Balsamic vinegar'
     ],
     instructions: [
-      'Wash and dry all vegetables',
-      'Cut tomatoes in half',
-      'Slice cucumber and red onion',
-      'Combine all vegetables in a bowl',
-      'Add olives and crumbled feta',
-      'Drizzle with olive oil and vinegar',
-      'Season with salt and pepper',
-      'Toss gently and serve'
+      'Chop veggies, combine in a bowl.',
+      'Add olives, feta.',
+      'Drizzle with oil and vinegar.',
+      'Season and serve.'
     ]
   }
 };
@@ -100,39 +90,26 @@ type Props = {
   params: {
     id: string
   }
-  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default function RecipeDetail({ params, searchParams }: Props) {
-  const recipe = recipesData[params.id] || recipesData['1']; // Fallback to first recipe if ID not found
+export default function RecipeDetail({ params }: Props) {
+  const recipe = recipesData[params.id] || recipesData['1'];
   
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto px-6 py-12">
       <div className="max-w-4xl mx-auto">
-        {/* Back Button */}
-        <Link 
-          href="/recipes"
-          className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8"
-        >
+        <Link href="/recipes" className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8">
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
           Back to Recipes
         </Link>
 
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{recipe.title}</h1>
-          <p className="text-lg text-gray-600">{recipe.description}</p>
-        </div>
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">{recipe.title}</h1>
+        <p className="text-lg text-gray-600 mb-8">{recipe.description}</p>
 
-        <div className="mb-12 relative h-[400px] rounded-lg overflow-hidden">
-          <Image
-            src={recipe.image}
-            alt={recipe.title}
-            fill
-            className="object-cover"
-            priority
-          />
+        <div className="mb-8 relative h-[400px] rounded-lg overflow-hidden">
+          <Image src={recipe.image} alt={recipe.title} fill className="object-cover" priority />
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
