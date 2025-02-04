@@ -96,7 +96,14 @@ const recipesData = {
   }
 };
 
-export default function RecipeDetail({ params }: { params: { id: string } }) {
+type Props = {
+  params: {
+    id: string
+  }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default function RecipeDetail({ params, searchParams }: Props) {
   const recipe = recipesData[params.id] || recipesData['1']; // Fallback to first recipe if ID not found
   
   return (
