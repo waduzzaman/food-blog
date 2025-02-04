@@ -88,13 +88,13 @@ const recipesData = {
 
 type Props = {
   params: {
-    id: string
-  }
-}
+    id?: string;
+  };
+};
 
-export default async function RecipeDetail({ params }: Props) {
-  const recipe = recipesData[params.id] || recipesData['1'];
-  
+export default function RecipeDetail({ params }: Props) {
+  const recipe = recipesData[params?.id ?? '1']; // Ensure fallback to '1' safely
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
       <div className="max-w-4xl mx-auto">
@@ -108,7 +108,7 @@ export default async function RecipeDetail({ params }: Props) {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">{recipe.title}</h1>
         <p className="text-lg text-gray-600 mb-8">{recipe.description}</p>
 
-        <div className="mb-8 relative h-[400px] rounded-lg overflow-hidden">
+        <div className="mb-8 relative h-[400px] w-full rounded-lg overflow-hidden">
           <Image src={recipe.image} alt={recipe.title} fill className="object-cover" priority />
         </div>
 
