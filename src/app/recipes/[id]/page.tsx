@@ -88,14 +88,13 @@ const recipesData = {
 
 type Props = {
   params: {
-    id?: string;
+    id: string;
   };
 };
 
 export default function RecipeDetail({ params }: Props) {
-  // const recipe = recipesData[params?.id ?? '1']; // Ensure fallback to '1' safely
-  const recipe = recipesData[params?.id as keyof typeof recipesData] ?? recipesData['1'];
-
+  const recipeId = params.id in recipesData ? params.id : '1';
+  const recipe = recipesData[recipeId];
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -137,7 +136,7 @@ export default function RecipeDetail({ params }: Props) {
           <div>
             <h2 className="text-2xl font-semibold mb-4">Ingredients</h2>
             <ul className="space-y-3">
-              {recipe.ingredients.map((ingredient: string, index: number) => (
+              {recipe.ingredients.map((ingredient, index) => (
                 <li key={index} className="flex items-center">
                   <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
                   {ingredient}
@@ -149,7 +148,7 @@ export default function RecipeDetail({ params }: Props) {
           <div>
             <h2 className="text-2xl font-semibold mb-4">Instructions</h2>
             <ol className="space-y-4">
-              {recipe.instructions.map((instruction: string, index: number) => (
+              {recipe.instructions.map((instruction, index) => (
                 <li key={index} className="flex">
                   <span className="font-bold mr-4">{index + 1}.</span>
                   {instruction}
